@@ -1,0 +1,24 @@
+{% extends "app/base.html" %}
+{% block title %}{{data.blog_title}}{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row product-container">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="image-box">
+          <img src="{{data.blog_photo.url}}" alt="Product Image" class="product-image">
+        </div>
+      </div>
+      <div class="col-md-6 d-flex flex-column justify-content-between">
+        <div>
+          <h2 class="product-title">{{data.blog_title}}</h2>
+          <p class="product-description">{{data.blog_description}}</p>
+        </div>
+        <div class="mt-4">
+          {% if current_user == model_user %}
+          <a href="#" class="btn btn-outline-secondary">Delete this Blog</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

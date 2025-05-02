@@ -1,0 +1,34 @@
+{% extends "app/base.html" %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <div class="form-profile-main">
+        <div class="info-form-container">
+            <h2>Your Information</h2>
+            <h2>Welcome {{request.user|capfirst}}</h2>
+            <form action="" method="post" novalidate>
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger my-3">{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                {% for f in form %}
+                <div class="form-section">
+                    {{f.label_tag}}
+                    {{f}}
+                    <p class="text-danger">{{f.errors|striptags}}</p>
+                </div>
+                {% endfor %}
+                <input type="submit" value="Update Profile" class="update-btn mt-3">
+            </form>
+        </div>
+    </div>
+{% endblock content %}

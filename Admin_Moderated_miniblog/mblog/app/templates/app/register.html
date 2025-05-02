@@ -1,0 +1,33 @@
+{% extends "app/base.html" %}
+{% block title %}Register{% endblock title %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+{% endif %}
+<div class="reg-body">
+    <div class="reg-form-container">
+      <h2 class="reg-form-title">Create an Account</h2>
+      <form method="post" novalidate>
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="mb-3">
+            {% for f in form %}
+                {{f.label_tag}}
+                {{f}}
+                <p class="text-danger">{{f.errors|striptags}}</p>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn reg-btn-register w-100">Register</button>
+      </form>
+    </div>
+</div>
+{% endblock content %}

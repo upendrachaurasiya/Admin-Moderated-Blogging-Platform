@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div class="container">
+    {% if data %}
+    <div class="row g-4">
+      <!-- Card Example -->
+        {% for d in data %}
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="card social-card">
+                    <div class="social-image-container">
+                        <img src="{{d.photo.url}}" alt="Nature Image">
+                    </div>
+                    <div class="social-card-body">
+                        <div>
+                            <h5 class="social-title">{{d.user|capfirst}}</h5>
+                            <h5 class="social-title">{{d.title}}</h5>
+                            <p class="social-description">{{d.description}}</p>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="btn btn-outline-danger">❤️ Like</button>
+                            <a href="{% url "itemdetails" d.id %}" class="btn btn-outline-primary">Read All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    
+
+    <!-- Add more cards here -->
+    </div>
+    {% else %}
+    <div class="alert alert-danger">No Post has approved by admin right now.</div>
+{% endif %}
+</div>
+
+{% endblock content %}
